@@ -5,12 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'videolaptop.dart';
 import 'videomobile.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -45,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Center(
-                      child: shopnowbutton(size),
+                      child: shopnowbutton(size, context),
                     )
                   ],
                 ),
@@ -64,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                     Positioned(
                       left: size.width * .45,
                       top: size.height * .65,
-                      child: shopnowbutton(size),
+                      child: shopnowbutton(size, context),
                     )
                   ],
                 ),
@@ -74,7 +69,7 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  shopnowbutton(size) {
+  shopnowbutton(size, context) {
     return Opacity(
       opacity: .5,
       child: MaterialButton(

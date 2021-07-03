@@ -5,14 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'cart.dart';
 
-class Shop extends StatefulWidget {
-  @override
-  _ShopState createState() => _ShopState();
-}
-
 List selectedproducts = [];
 
-class _ShopState extends State<Shop> {
+class Shop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -26,14 +21,14 @@ class _ShopState extends State<Shop> {
         letterSpacing: 15);
     return LayoutBuilder(builder: (context, constraints) {
       if (constraints.maxWidth < 600) {
-        return scaffold(size, h1mobile);
+        return scaffold(size, h1mobile, context);
       } else {
-        return scaffold(size, h1laptop);
+        return scaffold(size, h1laptop, context);
       }
     });
   }
 
-  scaffold(size, h1) {
+  scaffold(size, h1, context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade800,
       appBar: AppBar(

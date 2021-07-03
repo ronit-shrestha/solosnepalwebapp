@@ -55,7 +55,7 @@ class _CartState extends State<Cart> {
         width: size.height * .2,
         height: size.height * .06,
         child: FloatingActionButton(
-          elevation: 10,
+          elevation: 20,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           onPressed: () {
@@ -65,8 +65,8 @@ class _CartState extends State<Cart> {
               }));
             }
           },
-          backgroundColor: Colors.black,
-          child: Text('PROCEED', style: h2.copyWith(color: Colors.white)),
+          backgroundColor: Colors.white,
+          child: Text('PROCEED', style: h2.copyWith(color: Colors.black)),
         ),
       ),
       appBar: AppBar(
@@ -85,12 +85,12 @@ class _CartState extends State<Cart> {
               end: Alignment.bottomRight,
               colors: [Colors.grey.shade800, Colors.black]),
         ),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
               '<<< to remove item',
-              style: GoogleFonts.koHo(color: Colors.black),
-              textAlign: TextAlign.end,
+              style: GoogleFonts.koHo(color: Colors.grey.shade400),
             ),
             cartitems(size, textsize),
             Divider(
@@ -98,10 +98,12 @@ class _CartState extends State<Cart> {
               color: Colors.grey.shade500,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ListTile(
-                title: Text('TOTAL:', style: h2),
-                trailing: Text('Rs ' + '$sum', style: h2),
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                children: [
+                  Text('TOTAL:   ', style: h2),
+                  Text('Rs ' + '$sum', style: h2),
+                ],
               ),
             ),
           ],
@@ -112,49 +114,51 @@ class _CartState extends State<Cart> {
 
   cartitems(size, textsize) {
     return Container(
-      child: ListView.builder(
-        itemCount: selectedproducts.length,
-        shrinkWrap: true,
-        itemBuilder: (context, i) {
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Dismissible(
-              confirmDismiss: (direction) {
-                return showAlertDialog(context, i);
-              },
-              direction: DismissDirection.endToStart,
-              background: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.red),
-                  child: Icon(Icons.delete, color: Colors.white),
-                  alignment: Alignment.centerRight,
-                  padding: EdgeInsets.only(right: 30),
+      child: Expanded(
+        child: ListView.builder(
+          itemCount: selectedproducts.length,
+          shrinkWrap: true,
+          itemBuilder: (context, i) {
+            return Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Dismissible(
+                confirmDismiss: (direction) {
+                  return showAlertDialog(context, i);
+                },
+                direction: DismissDirection.endToStart,
+                background: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red),
+                    child: Icon(Icons.delete, color: Colors.white),
+                    alignment: Alignment.centerRight,
+                    padding: EdgeInsets.only(right: 30),
+                  ),
                 ),
-              ),
-              key: ValueKey(123),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                color: Colors.black,
-                elevation: 5,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: ListTile(
-                    leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(selectedproducts[i].i1)),
-                    title: Text(selectedproducts[i].type, style: textsize),
-                    trailing: Text('Rs ' + selectedproducts[i].price,
-                        style: textsize),
+                key: ValueKey(123),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  color: Colors.black,
+                  elevation: 5,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: ListTile(
+                      leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(selectedproducts[i].i1)),
+                      title: Text(selectedproducts[i].type, style: textsize),
+                      trailing: Text('Rs ' + selectedproducts[i].price,
+                          style: textsize),
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

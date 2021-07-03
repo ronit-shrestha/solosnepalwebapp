@@ -6,15 +6,11 @@ import 'package:completesoloswebsite/screens/shop/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductClass extends StatefulWidget {
+class ProductClass extends StatelessWidget {
   final String appbartitle;
 
   ProductClass({this.appbartitle});
-  @override
-  _ProductClassState createState() => _ProductClassState();
-}
 
-class _ProductClassState extends State<ProductClass> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -32,14 +28,14 @@ class _ProductClassState extends State<ProductClass> {
 
     return LayoutBuilder(builder: (context, constraints) {
       if (constraints.maxWidth < 600) {
-        return scaffold(size, textsizemobile, h1mobile, h2mobile);
+        return scaffold(size, textsizemobile, h1mobile, h2mobile, context);
       } else {
-        return scaffold(size, textsizelaptop, h1laptop, h2laptop);
+        return scaffold(size, textsizelaptop, h1laptop, h2laptop, context);
       }
     });
   }
 
-  scaffold(size, textsize, h1, h2) {
+  scaffold(size, textsize, h1, h2, context) {
     return Scaffold(
         backgroundColor: Colors.grey[800],
         appBar: AppBar(
@@ -49,7 +45,7 @@ class _ProductClassState extends State<ProductClass> {
             ),
           ),
           toolbarHeight: size.height * .08,
-          title: Text(widget.appbartitle, style: h1),
+          title: Text(appbartitle, style: h1),
           actions: [
             InkWell(
                 onTap: () {
@@ -70,7 +66,7 @@ class _ProductClassState extends State<ProductClass> {
             child: StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection('products')
-                  .where('collection', isEqualTo: widget.appbartitle)
+                  .where('collection', isEqualTo: appbartitle)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
@@ -124,7 +120,7 @@ class _ProductClassState extends State<ProductClass> {
                               child: Row(
                                   children: List.generate(docimage.length, (i) {
                                 return _imagebox(
-                                    size, docimage[i], docimage[i]);
+                                    size, docimage[i], docimage[i], context);
                               })),
                             ),
                           ),
@@ -206,6 +202,7 @@ class _ProductClassState extends State<ProductClass> {
                                         elevation: 10,
                                         onPressed: () {
                                           showAlertDialog(context);
+
                                           selectedproducts
                                               .add(ProductImageClass(
                                             type: doc['type'],
@@ -239,7 +236,7 @@ class _ProductClassState extends State<ProductClass> {
             )));
   }
 
-  _imagebox(size, imagelist, herotag) {
+  _imagebox(size, imagelist, herotag, context) {
     return Row(
       children: [
         ClipRRect(

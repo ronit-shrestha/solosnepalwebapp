@@ -5,12 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 TransformationController controlmap1 = TransformationController();
 TransformationController controlmap2 = TransformationController();
 
-class ContactUs extends StatefulWidget {
-  @override
-  _ContactUsState createState() => _ContactUsState();
-}
-
-class _ContactUsState extends State<ContactUs> {
+class ContactUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -65,38 +60,16 @@ class _ContactUsState extends State<ContactUs> {
                                 children: [
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                    child: InteractiveViewer(
-                                      boundaryMargin:
-                                          EdgeInsets.all(double.infinity),
-                                      transformationController: controlmap1,
-                                      onInteractionEnd: (val) {
-                                        setState(() {
-                                          controlmap1.value =
-                                              Matrix4.identity();
-                                        });
-                                      },
-                                      child: Image(
-                                          height: size.height * .3,
-                                          image: AssetImage('assets/map2.png')),
-                                    ),
+                                    child: Image(
+                                        height: size.height * .3,
+                                        image: AssetImage('assets/map2.png')),
                                   ),
                                   SizedBox(width: size.height * .05),
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
-                                    child: InteractiveViewer(
-                                      boundaryMargin:
-                                          EdgeInsets.all(double.infinity),
-                                      transformationController: controlmap2,
-                                      onInteractionEnd: (details) {
-                                        setState(() {
-                                          controlmap2.value =
-                                              Matrix4.identity();
-                                        });
-                                      },
-                                      child: Image(
-                                          height: size.height * .3,
-                                          image: AssetImage('assets/map1.png')),
-                                    ),
+                                    child: Image(
+                                        height: size.height * .3,
+                                        image: AssetImage('assets/map1.png')),
                                   ),
                                 ],
                               ),

@@ -2,12 +2,7 @@ import 'package:completesoloswebsite/screens/drawer/solosdrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AboutUs extends StatefulWidget {
-  @override
-  _AboutUsState createState() => _AboutUsState();
-}
-
-class _AboutUsState extends State<AboutUs> {
+class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

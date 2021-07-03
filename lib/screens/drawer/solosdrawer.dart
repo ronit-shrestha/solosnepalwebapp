@@ -5,14 +5,7 @@ import 'package:completesoloswebsite/screens/shop/shop.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../home/homepage.dart';
-
-class SolosDrawer extends StatefulWidget {
-  @override
-  _SolosDrawerState createState() => _SolosDrawerState();
-}
-
-class _SolosDrawerState extends State<SolosDrawer> {
+class SolosDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -25,36 +18,38 @@ class _SolosDrawerState extends State<SolosDrawer> {
 
     return SafeArea(child: LayoutBuilder(builder: (context, constraints) {
       if (constraints.maxWidth < 600) {
-        return drawermobile(size, textsizemobile, h1mobile);
+        return drawermobile(size, textsizemobile, h1mobile, context);
       } else {
-        return drawerlaptop(size, textsizelaptop, h1laptop);
+        return drawerlaptop(size, textsizelaptop, h1laptop, context);
       }
     }));
   }
 
-  drawermobile(size, textsize, h1) {
+  drawermobile(size, textsize, h1, context) {
     return ClipRRect(
       borderRadius: BorderRadius.horizontal(right: Radius.circular(120)),
       child: Opacity(
         opacity: 0.85,
         child: Container(
-            width: size.width * .6, child: commondrawer(size, textsize, h1)),
+            width: size.width * .6,
+            child: commondrawer(size, textsize, h1, context)),
       ),
     );
   }
 
-  drawerlaptop(size, textsize, h1) {
+  drawerlaptop(size, textsize, h1, context) {
     return ClipRRect(
       borderRadius: BorderRadius.horizontal(right: Radius.circular(120)),
       child: Opacity(
         opacity: 0.85,
         child: Container(
-            width: size.height * .5, child: commondrawer(size, textsize, h1)),
+            width: size.height * .5,
+            child: commondrawer(size, textsize, h1, context)),
       ),
     );
   }
 
-  commondrawer(size, textsize, h1) {
+  commondrawer(size, textsize, h1, context) {
     return Drawer(
       child: Container(
         decoration: BoxDecoration(
@@ -73,9 +68,7 @@ class _SolosDrawerState extends State<SolosDrawer> {
             SizedBox(height: size.height * 0.05),
             ListTile(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return HomePage();
-                }));
+                Navigator.popUntil(context, (route) => route.isFirst);
               },
               title: Text('HOME',
                   style: textsize.copyWith(fontWeight: FontWeight.bold)),
