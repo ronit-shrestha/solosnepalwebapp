@@ -10,14 +10,13 @@ class HeroWindow extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.black,
-        leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back)),
-      ),
+          elevation: 0,
+          backgroundColor: Colors.black,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back))),
       body: Center(
         child: InteractiveViewer(
           boundaryMargin: EdgeInsets.all(double.infinity),
